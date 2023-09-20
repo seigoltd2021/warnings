@@ -1,0 +1,29 @@
+# Пример анализа данных опроса на Perl
+use strict;
+use warnings;
+
+my %survey_data;
+
+while (1) {
+    print "Введите вопрос опроса (или 'завершить' для завершения опроса): ";
+    my $question = <STDIN>;
+    chomp $question;
+
+    if ($question eq 'завершить') {
+        last;
+    }
+
+    print "Введите ответ на вопрос: ";
+    my $response = <STDIN>;
+    chomp $response;
+
+    push @{$survey_data{$question}}, $response;
+}
+
+print "Результаты опроса:\n";
+foreach my $question (keys %survey_data) {
+    print "Вопрос: $question\n";
+    foreach my $response (@{$survey_data{$question}}) {
+        print "Ответ: $response\n";
+    }
+}
